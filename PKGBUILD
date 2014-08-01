@@ -2,10 +2,10 @@
 
 pkgname=ifcplugin
 pkgver=2.0.5.7
-pkgrel=3
+pkgrel=4
 _ubuntuver=raring
 _ubunturel=4
-pkgdesc="Crypto Interface Web Browser Plugin"
+pkgdesc="Crypto Interface Web Browser Plugin for https://gosuslugi.ru"
 arch=('i686' 'x86_64')
 url="https://esia.gosuslugi.ru"
 license=('unknown')
