@@ -2,14 +2,14 @@
 
 pkgname=ifcplugin
 pkgver=2.0.5.7
-pkgrel=1
+pkgrel=3
 _ubuntuver=raring
 _ubunturel=4
 pkgdesc="Crypto Interface Web Browser Plugin"
 arch=('i686' 'x86_64')
 url="https://esia.gosuslugi.ru"
 license=('unknown')
-depends=('pcsc-tools' glibc', 'acsccid')
+depends=(pcsc-tools glibc acsccid)
 conflicts=()
 if [[ "$CARCH" == "i686" ]]; then
   source=("https://esia.gosuslugi.ru/sia-web/htdocs/plugin/IFCPlugin-i386.deb")
@@ -18,10 +18,16 @@ else
   source=("https://esia.gosuslugi.ru/sia-web/htdocs/plugin/IFCPlugin-x86_64.deb")
   sha512sums=('2bd547bea60c703018821942d8d496d4e36bf4e580ea517fa7ef7596faa4f944e7f31ce641ad5da21baad17ed82f5b373118860dd8a258b5cb7243ae36f3df3c')
 fi
-
+install=ifcplugin.install
 
 package() {
   cd "$srcdir"
   bsdtar -xf data.tar.gz -C "$pkgdir"
 
+  sed -i "s/ifd-ccid.bundle/ifd-acsccid.bundle/g" $pkgdir/etc/update_ccid_boundle/update_ccid_boundle.sh
+
+  mkdir -p $pkgdir/var/log/ifc
+  mkdir -p $pkgdir/var/log/ifc/engine_logs
+  chmod 777 $pkgdir/var/log/ifc
+  chmod 777 $pkgdir/var/log/ifc/engine_logs
 }
